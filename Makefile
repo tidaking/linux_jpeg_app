@@ -8,7 +8,7 @@ CPPFLAGS :=
 CFLAGS := -fno-builtin
 
 SRC = ./src/
-INC = -I ./msrv -I ./mapi/mm -I ./common -I ./msrv/event_manager -I ./mapi/input
+INC = -I ./msrv -I ./mapi/mm -I ./common -I ./msrv/event_manager -I ./mapi/input -I ./mapi/network
 #OBJ =  $(SRC)event_manager/event_manager.cpp $(SRC)applet/applet.cpp $(SRC)app_fb_event.cpp
 
 MSRV_OBJ = $(subst .cpp,.o,$(wildcard ./msrv/app_fb.cpp))
@@ -16,6 +16,7 @@ MSRV_OBJ += $(subst .cpp,.o,$(wildcard ./common/com_event.cpp))
 
 MAPI_OBJ = $(subst .cpp,.o,$(wildcard ./mapi/mm/*.cpp))
 MAPI_OBJ += $(subst .cpp,.o,$(wildcard ./mapi/input/*.cpp))
+MAPI_OBJ += $(subst .cpp,.o,$(wildcard ./mapi/network/*.cpp))
 
 LIB = -ljpeg -lpthread
 
@@ -62,6 +63,7 @@ clean:
 	-rm app
 	-rm test
 	-rm fb
+	-find -name *.o | xargs rm -rf
 
 
 #all:
@@ -69,3 +71,4 @@ clean:
 #	arm-linux-ld -Ttext 0x20000000 -o led.elf start.o
 #	arm-linux-objcopy -O binary led.elf robin.bin
 #
+
